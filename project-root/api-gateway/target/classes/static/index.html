@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Key-Value API Gateway</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #111827;
+            font-size: 2.5rem;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #2563eb;
+            color: white;
+            padding: 10px 16px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        h2 {
+            margin-top: 40px;
+            color: #111827;
+        }
+
+        pre {
+            background: #e5e7eb;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+<h1>Key-Value Store</h1>
+
+<form id="setForm">
+    <label for="keyInput">Chave (Key)</label>
+    <input type="text" id="keyInput" name="key" required>
+
+    <label for="valueInput">Valor (Value)</label>
+    <input type="text" id="valueInput" name="value" required>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<form id="getForm">
+    <label for="getKeyInput">Buscar Chave (Key)</label>
+    <input type="text" id="getKeyInput" name="getKey" required>
+
+    <button type="submit">Buscar</button>
+</form>
+
+<h2>Resultado</h2>
+<pre id="result">Nenhuma requisição ainda.</pre>
+
+<script>
+    document.getElementById('setForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const key = document.getElementById('keyInput').value;
+        const value = document.getElementById('valueInput').value;
+
+        const response = await fetch(`/store/${key}`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ value })
+        });
+
+        const text = await response.text();
+        document.getElementById('result').textContent = `Resposta do POST: ${text}`;
+    });
+
+    document.getElementById('getForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const key = document.getElementById('getKeyInput').value;
+
+        const response = await fetch(`/store/${key}`);
+        const text = await response.text();
+        document.getElementById('result').textContent = `Valor da chave "${key}": ${text}`;
+    });
+</script>
+</body>
+</html>
