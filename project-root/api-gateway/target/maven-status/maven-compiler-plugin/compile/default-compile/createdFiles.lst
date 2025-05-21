@@ -1,0 +1,3 @@
+com\example\gateway\GatewayApplication.class
+com\example\gateway\controller\KeyValueController.class
+com\example\gateway\service\KeyValueService.class

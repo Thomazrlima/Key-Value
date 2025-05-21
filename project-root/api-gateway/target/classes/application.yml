@@ -13,7 +13,7 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-        - id: storage-node
-          uri: lb://storage-node
+        - id: store_route
+          uri: http://127.0.0.1:8080
           predicates:
             - Path=/store/**

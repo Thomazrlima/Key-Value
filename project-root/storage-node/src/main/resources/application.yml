@@ -4,6 +4,16 @@ server:
 spring:
   application:
     name: storage-node
+  datasource:
+    url: jdbc:mysql://localhost:3307/kv_backup
+    username: admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
 
 eureka:
   client:

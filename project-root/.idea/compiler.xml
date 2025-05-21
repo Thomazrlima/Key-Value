@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
+        <module name="backup-db" />
         <module name="eureka-server" />
         <module name="storage-node" />
         <module name="read-node" />

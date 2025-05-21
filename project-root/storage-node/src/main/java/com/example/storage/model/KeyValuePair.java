@@ -1,22 +1,29 @@
 package com.example.storage.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "key_value_pair")
 public class KeyValuePair {
-    private String key;
+    @Id
+    private String chave;
     private String value;
 
     public KeyValuePair() {}
 
-    public KeyValuePair(String key, String value) {
-        this.key = key;
+    public KeyValuePair(String chave, String value) {
+        this.chave = chave;
         this.value = value;
     }
 
     public String getKey() {
-        return key;
+        return chave;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setKey(String chave) {
+        this.chave = chave;
     }
 
     public String getValue() {
