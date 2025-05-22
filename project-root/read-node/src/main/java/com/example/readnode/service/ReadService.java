@@ -1,25 +1,20 @@
 package com.example.readnode.service;
 
+import com.example.readnode.model.KeyValuePair;
+import com.example.readnode.repository.KeyValuePairRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.Optional;
 
 @Service
 public class ReadService {
 
-    private final WebClient webClient;
-
-    public ReadService() {
-        this.webClient = WebClient.builder().build();
-    }
+    @Autowired
+    private KeyValuePairRepository repository;
 
     public String getValue(String key) {
-
-        String storageNodeUrl = "http://storage-node/storage/" + key;
-
-        return webClient.get()
-                .uri(storageNodeUrl)
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
+        Optional<KeyValuePair> kvp = repository.findById(key);
+        return kvp.map(KeyValuePair::getValue).orElse(null);
     }
 }

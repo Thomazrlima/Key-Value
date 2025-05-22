@@ -2,6 +2,7 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/7373/7373942.png">
     <title>Key-Value API Gateway</title>
     <style>
         body {
@@ -24,9 +25,24 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
+            margin: 20px;
+        }
+
+        .form-full {
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .form-small {
+            width: 100%;
+            max-width: 240px;
         }
 
         label {
@@ -39,10 +55,11 @@
         input {
             width: 100%;
             padding: 10px;
-            margin-bottom: 16px;
+            margin: 0 5px 16px 5px;
             border: 1px solid #d1d5db;
             border-radius: 8px;
             font-size: 1rem;
+            box-sizing: border-box;
         }
 
         button {
@@ -72,14 +89,14 @@
             font-size: 0.95rem;
             white-space: pre-wrap;
             word-break: break-word;
-            max-width: 400px;
+            max-width: 600px;
         }
     </style>
 </head>
 <body>
 <h1>Key-Value Store</h1>
 
-<form id="setForm">
+<form id="setForm" class="form-full">
     <label for="keyInput">Chave (Key)</label>
     <input type="text" id="keyInput" name="key" required>
 
@@ -89,12 +106,19 @@
     <button type="submit">Salvar</button>
 </form>
 
-<form id="getForm">
-    <label for="getKeyInput">Buscar Chave (Key)</label>
-    <input type="text" id="getKeyInput" name="getKey" required>
+<div class="form-row">
+    <form id="getForm" class="form-small">
+        <label for="getKeyInput">Buscar Chave</label>
+        <input type="text" id="getKeyInput" name="getKey" required>
+        <button type="submit">Buscar</button>
+    </form>
 
-    <button type="submit">Buscar</button>
-</form>
+    <form id="deleteForm" class="form-small">
+        <label for="deleteKeyInput">Deletar Chave</label>
+        <input type="text" id="deleteKeyInput" name="deleteKey" required>
+        <button type="submit">Deletar</button>
+    </form>
+</div>
 
 <h2>Resultado</h2>
 <pre id="result">Nenhuma requisição ainda.</pre>
@@ -105,7 +129,7 @@
         const key = document.getElementById('keyInput').value;
         const value = document.getElementById('valueInput').value;
 
-        const response = await fetch(`/store/${key}`, {
+        const response = await fetch(`http://localhost:8081/store/${key}`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ value })
@@ -119,9 +143,21 @@
         e.preventDefault();
         const key = document.getElementById('getKeyInput').value;
 
-        const response = await fetch(`/store/${key}`);
+        const response = await fetch(`http://localhost:8081/store/${key}`);
         const text = await response.text();
         document.getElementById('result').textContent = `Valor da chave "${key}": ${text}`;
+    });
+
+    document.getElementById('deleteForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const key = document.getElementById('deleteKeyInput').value;
+
+        const response = await fetch(`http://localhost:8081/store/${key}`, {
+            method: 'DELETE'
+        });
+
+        const text = await response.text();
+        document.getElementById('result').textContent = `Resposta do DELETE: ${text}`;
     });
 </script>
 </body>

@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: Read Node API
+  version: 1.0.0
+  description: API para leitura de valores no sistema distribuído de armazenamento key-value.
+
+servers:
+  - url: http://localhost:8082
+    description: Servidor local do read-node
+
+paths:
+  /get/{key}:
+    get:
+      summary: Buscar valor por chave
+      description: Retorna o valor associado a uma chave.
+      parameters:
+        - name: key
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Chave do par chave-valor
+      responses:
+        '200':
+          description: Valor encontrado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    example: nome
+                  value:
+                    type: string
+                    example: Thomaz
+        '404':
+          description: Chave não encontrada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Chave não encontrada

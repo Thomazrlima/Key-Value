@@ -1,3 +1,6 @@
 com\example\readnode\controller\ReadController.class
+com\example\readnode\client\StorageClient.class
 com\example\readnode\ReadNodeApplication.class
+com\example\readnode\repository\KeyValuePairRepository.class
+com\example\readnode\model\KeyValuePair.class
 com\example\readnode\service\ReadService.class
