@@ -1,0 +1,42 @@
+# Diretórios de build
+/target/
+/**/target/
+
+# IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VSCode
+.vscode/
+
+# Arquivos temporários e de sistema
+*.log
+*.class
+*.jar
+*.war
+*.ear
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# Arquivos de ambiente
+.env
+.env.local
+*.bak
+
+# Pasta de execução Docker (caso gere volume local)
+docker-volume/
+
+# Logs do Spring Boot
+spring.log
+
+# Arquivos de lock específicos
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IntelliJ run configs
+*.run.xml
