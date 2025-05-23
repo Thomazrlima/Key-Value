@@ -3,26 +3,44 @@ services:
     build:
       context: ./eureka-server
       dockerfile: Dockerfile
+    networks:
+      - key-value
 
   gateway:
     build:
       context: ./api-gateway
       dockerfile: Dockerfile
+    networks:
+      - key-value
+    ports:
+      - "8080:8080"
 
   read-node:
     build:
       context: ./read-node
       dockerfile: Dockerfile
+    networks:
+      - key-value
+    ports:
+      - "8083:8083"
 
   storage-node:
     build:
       context: ./storage-node
       dockerfile: Dockerfile
+    networks:
+      - key-value
+    ports:
+      - "8081:8081"
 
   backup-db:
     build:
       context: ./backup-db
       dockerfile: Dockerfile
+    networks:
+      - key-value
+    ports:
+      - "8084:8084"
 
   db:
     image: mysql:8.0
@@ -37,6 +55,12 @@ services:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - key-value
 
 volumes:
   mysql_data:
+
+
+networks:
+  key-value:

@@ -7,26 +7,15 @@ spring:
   main:
     web-application-type: reactive
 
-  cloud:
-    gateway:
-      routes:
-        - id: docs-api
-          uri: http://localhost:8082
-          predicates:
-            - Path=/docs-api/**
-          filters:
-            - RewritePath=/docs-api/(?<segment>.*), /${segment}
-
   springdoc:
     swagger-ui:
       path: /docs-api/swagger-ui.html
       urls:
-        - name: Gateway API (mesmo que sem docs)
-          url: http://localhost:8080/v3/api-docs  # Vai dar erro (404), mas serve pra mostrar que falhou
-        - name: Storage Node API
-          url: http://localhost:8083/v3/api-docs
+        - name: Gateway API
         - name: Read Node API
-          url: http://localhost:8084/v3/api-docs
+          url: http://read-node:8083/v3/api-docs
+        - name: Storage Node API
+          url: http://storage-node:8081/v3/api-docs
       config-url: /docs-api/swagger-resources/configuration/ui
 
     api-docs:
@@ -38,7 +27,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka:8761/eureka/
 
 management:
   endpoints:
