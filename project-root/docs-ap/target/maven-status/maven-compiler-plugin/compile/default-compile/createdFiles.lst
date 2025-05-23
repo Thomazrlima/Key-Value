@@ -1,2 +1,2 @@
-exemplo\docsapi\DocsApiApplication.class
-exemplo\controller\ExemploController.class
+com\docsapi\controller\ExemploController.class
+com\docsapi\DocsApiApplication.class

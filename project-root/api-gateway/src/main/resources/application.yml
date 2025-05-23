@@ -6,48 +6,38 @@ spring:
     name: api-gateway
   main:
     web-application-type: reactive
+
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
       routes:
-        - id: swagger-ui
-          uri: https://webjars.org
+        - id: docs-api
+          uri: http://localhost:8082
           predicates:
-            - Path=/swagger-ui.html
+            - Path=/docs-api/**
           filters:
-            - RewritePath=/swagger-ui.html, /swagger-ui/index.html
-            - SetPath=/
-        - id: swagger-resources
-          uri: http://localhost:${server.port}
-          predicates:
-            - Path=/swagger-resources/**
-        - id: api-docs
-          uri: http://localhost:${server.port}
-          predicates:
-            - Path=/v3/api-docs
-        - id: webjars
-          uri: https://webjars.org
-          predicates:
-            - Path=/webjars/**
-          filters:
-            - RewritePath=/webjars/(?<path>.*), /org/webjars/swagger-ui/2.5.0/$\{path}
+            - RewritePath=/docs-api/(?<segment>.*), /${segment}
+
+  springdoc:
+    swagger-ui:
+      path: /docs-api/swagger-ui.html
+      urls:
+        - name: Gateway API
+        - name: Storage Node API
+          url: http://localhost:8083/v3/api-docs
+        - name: Read Node API
+          url: http://localhost:8084/v3/api-docs
+      config-url: /docs-api/swagger-resources/configuration/ui
+
+    api-docs:
+      path: /v3/api-docs
+
+    swagger-resources:
+      path: /swagger-resources
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-    url: /v3/api-docs
-    config-url: /swagger-resources/configuration/ui
-  api-docs:
-    path: /v3/api-docs
-  swagger-resources:
-    path: /swagger-resources
 
 management:
   endpoints:
