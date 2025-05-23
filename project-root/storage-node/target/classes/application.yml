@@ -5,7 +5,7 @@ spring:
   application:
     name: storage-node
   datasource:
-    url: jdbc:mysql://localhost:3307/kv_backup
+    url: jdbc:mysql://db:3306/kv_backup
     username: admin
     password: admin
   jpa:

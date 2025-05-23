@@ -1,4 +1,19 @@
 services:
+  db:
+    image: mysql:8.0
+    container_name: backup-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: kv_backup
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - key-value
   eureka:
     build:
       context: ./eureka-server
@@ -41,22 +56,6 @@ services:
       - key-value
     ports:
       - "8084:8084"
-
-  db:
-    image: mysql:8.0
-    container_name: backup-db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: kv_backup
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
-    ports:
-      - "3307:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-    networks:
-      - key-value
 
 volumes:
   mysql_data:

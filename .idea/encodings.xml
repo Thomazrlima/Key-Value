@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/project-root/api-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/project-root/backup-db/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/project-root/backup-db/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/project-root/docs-ap/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/project-root/eureka-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/project-root/read-node/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/project-root/storage-node/src/main/java" charset="UTF-8" />
+  </component>
+</project>

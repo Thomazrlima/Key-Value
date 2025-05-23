@@ -1,4 +1,4 @@
-com\example\storage\model\KeyValuePair.class
-com\example\StorageApplication.class
-com\example\storage\controller\StorageController.class
-com\example\storage\repository\KeyValuePairRepository.class
+com/example/StorageApplication.class
+com/example/storage/controller/StorageController.class
+com/example/storage/model/KeyValuePair.class
+com/example/storage/repository/KeyValuePairRepository.class

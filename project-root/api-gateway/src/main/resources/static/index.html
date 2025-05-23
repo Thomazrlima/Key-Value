@@ -129,7 +129,7 @@
         const key = document.getElementById('keyInput').value;
         const value = document.getElementById('valueInput').value;
 
-        const response = await fetch(`http://localhost:8081/store/${key}`, {
+        const response = await fetch(`/storage/store/${key}`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ value })
@@ -143,7 +143,7 @@
         e.preventDefault();
         const key = document.getElementById('getKeyInput').value;
 
-        const response = await fetch(`http://localhost:8081/store/${key}`);
+        const response = await fetch(`/storage/store/${key}`);
         const text = await response.text();
         document.getElementById('result').textContent = `Valor da chave "${key}": ${text}`;
     });
@@ -152,7 +152,7 @@
         e.preventDefault();
         const key = document.getElementById('deleteKeyInput').value;
 
-        const response = await fetch(`http://localhost:8081/store/${key}`, {
+        const response = await fetch(`/storage/store/${key}`, {
             method: 'DELETE'
         });
 

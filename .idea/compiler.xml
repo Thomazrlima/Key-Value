@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="api-gateway" />
+        <module name="backup-db" />
+        <module name="docs-api" />
+        <module name="eureka-server" />
+        <module name="read-node" />
+        <module name="storage-node" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
+      <module name="docs-api" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+      <module name="read-node" options="-parameters" />
+      <module name="storage-node" options="-parameters" />
+    </option>
+  </component>
+</project>
